@@ -6,10 +6,10 @@ require 'universal_identifiable/version'
 Gem::Specification.new do |spec|
   spec.name          = "universal_identifiable"
   spec.version       = UniversalIdentifiable::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.authors       = ["Andreas Busold"]
+  spec.email         = ["an.bu@gmx.net"]
+  spec.description   = %q{Make your model uniq and identifiable through a readable name.}
+  spec.summary       = %q{Adds uuids to ActiveRecord models along with validators.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "minitest", "~> 5.0"
 end

@@ -5,7 +5,7 @@ module UniversalIdentifiable
   class UniversalIdentifiableTest < TestCase
 
     before do
-      @identifiable_model = FakeRecord.new(:uuid => "airport.dortmund")
+      @identifiable_model = FakeRecord.new(:uuid => "airport#{UniversalIdentifiable::NAMESPACER}dortmund")
     end
 
     it "is valid" do
@@ -40,10 +40,10 @@ module UniversalIdentifiable
     end
 
     it "has different uuid formats" do
-      assert_equal "airport.dortmund", @identifiable_model.uuid
+      assert_equal "airport#{UniversalIdentifiable::NAMESPACER}dortmund", @identifiable_model.uuid
 
       assert_equal "dortmund", @identifiable_model.uuid(:namespaced => false)
-      assert_equal "airport.dortmund", @identifiable_model.uuid(:namespaced => true)
+      assert_equal "airport#{UniversalIdentifiable::NAMESPACER}dortmund", @identifiable_model.uuid(:namespaced => true)
     end
 
   end

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["an.bu@gmx.net"]
   spec.description   = %q{Make your model uniq and identifiable through a readable name.}
   spec.summary       = %q{Adds uuids to ActiveRecord models along with validators.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/Kobra-Khan/universal_identifiable"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -21,4 +21,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency "sqlite3", "~> 1.3"
+  spec.add_runtime_dependency 'activerecord', '>= 3'
 end

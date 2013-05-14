@@ -29,12 +29,39 @@ add_index :airports, :uuid, :unique => true
 
 In your model:
 
-
 ```ruby
 class Airport < ActiveRecord::Base
   include UniversalIdentifiable
 end
 ```
+Uuids must be prefixed with the modelname and namespaced with a dot. E.G: "airport.dortmund"
+
+Set a uuid like you would with any other attribute:
+
+```ruby
+airport = Airport.new(airport: "airport.dortmund")
+```
+
+You have access to an unnamespaced uuid by passing the appropriate option:
+
+```ruby
+airport.uuid(namespaced: false)
+=> "dortmund"
+airport.uuid
+=> "airport.dortmund"
+```
+
+Validators:
+
+Two validators are automatically added to your model:
+
+```ruby
+validates :uuid, :presence => true, :uniqueness => true
+```
+TODO:
+
+- Automatically save uuid with corresponding modelname, seperated with namespacer.
+- Add rails generators to create migrations for desired models
 
 ## Contributing
 

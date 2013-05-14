@@ -1,5 +1,6 @@
 # UniversalIdentifiable
 
+Make your model uniq and identifiable through a readable name.
 Adds uuids to ActiveRecord models along with validators.
 
 ## Installation

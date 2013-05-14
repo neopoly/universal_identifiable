@@ -19,7 +19,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create a migration for your existing model which adds an attribute called 'uuid'. The type must be String.
+
+Example:
+<pre>
+add_column :airports, :uuid, :string
+add_index :airports, :uuid, :unique => true
+</pre>
+
+In your model:
+
+<pre>
+class Airport < ActiveRecord::Base
+  include UniversalIdentifiable
+end
+</pre>
 
 ## Contributing
 

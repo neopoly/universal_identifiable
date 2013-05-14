@@ -29,11 +29,12 @@ add_index :airports, :uuid, :unique => true
 
 In your model:
 
-<pre>
+
+```ruby
 class Airport < ActiveRecord::Base
   include UniversalIdentifiable
 end
-</pre>
+```
 
 ## Contributing
 

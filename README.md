@@ -39,7 +39,7 @@ Uuids must be prefixed with the modelname and namespaced with a dot. E.G: "airpo
 Set a uuid like you would with any other attribute:
 
 ```ruby
-airport = Airport.new(airport: "airport.dortmund")
+airport = Airport.new(uuid: "airport.dortmund")
 ```
 
 You have access to an unnamespaced uuid by passing the appropriate option:

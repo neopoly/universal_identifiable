@@ -1,3 +1,4 @@
+require 'rails'
 require 'minitest/autorun'
 require 'minitest/spec'
 require 'universal_identifiable'

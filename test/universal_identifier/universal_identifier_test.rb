@@ -9,9 +9,7 @@ module UniversalIdentifiable
     end
 
     it "is valid" do
-      assert @identifiable_model.uuid
-
-      @identifiable_model.valid?
+      assert @identifiable_model.valid?
 
       refute @identifiable_model.errors.full_messages.any? do |message|
         message.include? "uuid"

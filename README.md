@@ -21,12 +21,11 @@ Or install it yourself as:
 
 ## Usage
 
-Create a migration for your existing model which adds an attribute called 'uuid'. The type must be String.
+Create a migration for your existing model with the built in generator.
 
 Example:
 <pre>
-add_column :airports, :uuid, :string
-add_index :airports, :uuid, :unique => true
+rails g uuid Airport
 </pre>
 
 In your model:
@@ -63,7 +62,6 @@ validates :uuid, :presence => true, :uniqueness => true
 TODO:
 
 - Automatically save uuid with corresponding modelname, seperated with namespacer.
-- Add rails generators to create migrations for desired models
 
 ## Contributing
 

@@ -3,6 +3,8 @@
 Make your model uniq and identifiable through a readable name.
 Adds uuids to ActiveRecord models along with validators.
 
+[![Build Status](https://secure.travis-ci.org/neopoly/universal_identifiable.png?branch=master)](http://travis-ci.org/neopoly/universal_identifiable) [![Gem Version](https://badge.fury.io/rb/universal_identifiable.png)](http://badge.fury.io/rb/universal_identifiable) [![Code Climate](https://codeclimate.com/github/neopoly/universal_identifiable.png)](https://codeclimate.com/github/neopoly/universal_identifiable)
+
 ## Installation
 
 Add this line to your application's Gemfile:

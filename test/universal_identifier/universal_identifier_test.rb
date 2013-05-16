@@ -5,7 +5,8 @@ module UniversalIdentifiable
   class UniversalIdentifiableTest < TestCase
 
     before do
-      @identifiable_model = FakeRecord.new(:uuid => "airport#{UniversalIdentifiable::NAMESPACER}dortmund")
+      Airport.delete_all
+      @identifiable_model = Airport.new(:uuid => "dortmund")
     end
 
     it "is valid" do
@@ -18,7 +19,7 @@ module UniversalIdentifiable
 
     it "must have attributes present" do
       @identifiable_model.uuid = nil
-      @identifiable_model.valid?
+      refute @identifiable_model.valid?
 
       assert @identifiable_model.errors.full_messages.any? do |message|
         message.include? "blank"
@@ -28,9 +29,9 @@ module UniversalIdentifiable
     it "must be unique" do
       @identifiable_model.save!
 
-      new_model = FakeRecord.new
-      new_model.uuid = @identifiable_model.uuid
-      new_model.valid?
+      new_model = Airport.new
+      new_model.uuid = @identifiable_model.uuid(:namespaced => false)
+      refute new_model.valid?
 
       assert new_model.errors.full_messages.any? do |message|
         message.include? "taken"
@@ -42,6 +43,31 @@ module UniversalIdentifiable
 
       assert_equal "dortmund", @identifiable_model.uuid(:namespaced => false)
       assert_equal "airport#{UniversalIdentifiable::NAMESPACER}dortmund", @identifiable_model.uuid(:namespaced => true)
+    end
+
+    it "prefixes uuid with class name" do
+      airport = Airport.create(:uuid => "dortmund")
+
+      assert_equal "airport#{UniversalIdentifiable::NAMESPACER}dortmund", airport.uuid(:namespaced => true)
+      airport.uuid = "dusseldorf"
+      assert_equal "airport#{UniversalIdentifiable::NAMESPACER}dusseldorf", airport.uuid(:namespaced => true)
+      airport.update_attribute(:uuid, "dortmund")
+      assert_equal "airport#{UniversalIdentifiable::NAMESPACER}dortmund", airport.uuid(:namespaced => true)
+      airport.update_attributes(:uuid => "dusseldorf")
+      assert_equal "airport#{UniversalIdentifiable::NAMESPACER}dusseldorf", airport.uuid(:namespaced => true)
+    end
+
+    it "anything preceeding first namespacer is considered to be the uuid" do
+      airport = Airport.new(:uuid => "dortmund.foo.bar")
+
+      assert_equal "airport#{UniversalIdentifiable::NAMESPACER}dortmund.foo.bar", airport.uuid(:namespaced => true)
+      assert_equal "dortmund.foo.bar", airport.uuid(:namespaced => false)
+
+      airport.uuid = ""
+      assert_equal "", airport.uuid(:namespaced => false)
+
+      airport.uuid = nil
+      assert_equal nil, airport.uuid(:namespaced => false)
     end
 
   end

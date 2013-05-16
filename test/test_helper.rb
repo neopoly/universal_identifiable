@@ -6,7 +6,7 @@ require 'universal_identifiable'
 class TestCase < Minitest::Spec
 end
 
-class FakeRecord < ActiveRecord::Base
+class Airport < ActiveRecord::Base
   include UniversalIdentifiable
 end
 
@@ -18,7 +18,7 @@ ActiveRecord::Base.establish_connection(
 ActiveRecord::Schema.define do
   self.verbose = false
 
-  create_table :fake_records, :force => true do |t|
+  create_table :airports, :force => true do |t|
     t.string :uuid
   end
 end

@@ -1,11 +1,11 @@
 require "universal_identifiable/version"
 require 'active_record'
+require 'active_support/core_ext/string'
 
 module UniversalIdentifiable
-  # sample uuid: 'hotel.ritz'
-  # TODO: store underscored modelname as prefix automatically. e.G. '#{modelname}.ritz' when assigning attribute
 
   NAMESPACER = "."
+  REGEX      = Regexp.new("\\#{NAMESPACER}(.*)")
 
   def self.included(base)
     base.validates :uuid, :presence => true, :uniqueness => true
@@ -16,9 +16,16 @@ module UniversalIdentifiable
     options[:namespaced] ? read_attribute(:uuid) : short_uuid
   end
 
+  def uuid=(uuid)
+    uuid = "#{self.class.name.underscore}#{NAMESPACER}#{uuid}" if uuid
+    super uuid
+  end
+
   private
 
   def short_uuid
-    read_attribute(:uuid).split(NAMESPACER).last
+    value = read_attribute(:uuid)
+    value.match(REGEX)[1] if value
   end
+
 end
